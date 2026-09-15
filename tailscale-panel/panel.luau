@@ -194,7 +194,10 @@ function render()
     table.insert(body, ui.scroll({ gap = 8, flexGrow = 1 }, rows))
   end
 
-  panel.render(ui.column({ gap = 14, padding = 18, fill = "surface" }, body))
+  -- The panel gives its content a fixed-height surface. Let this root consume
+  -- that height so the nested ui.scroll receives the remaining space instead
+  -- of expanding to its children and losing its scroll viewport.
+  panel.render(ui.column({ flexGrow = 1, align = "stretch", gap = 14 }, body))
 end
 
 function onOpen()
