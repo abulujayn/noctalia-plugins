@@ -1,0 +1,18 @@
+id = "abulujayn/tailscale-panel"
+name = "Tailscale Panel"
+version = "1.0.0"
+plugin_api = 24
+author = "abulujayn"
+license = "MIT"
+dependencies = ["tailscale"]
+tags = ["network", "privacy", "utility"]
+icon = "brand-tailscale"
+description = "View Tailnet devices and manage the local Tailscale connection and exit node."
+
+[[panel]]
+id = "panel"
+entry = "panel.luau"
+width = 560
+height = 620
+placement = "floating"
+position = "center"
