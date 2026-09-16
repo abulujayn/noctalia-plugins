@@ -10,7 +10,7 @@ import tomllib
 with open(sys.argv[1], "rb") as f:
     manifest = tomllib.load(f)
 
-assert manifest["id"] == "abulujayn/tailscale-panel"
+assert manifest["id"] == "abulujayn/tailscale"
 assert manifest["dependencies"] == ["tailscale"]
 assert manifest["panel"][0]["id"] == "manager"
 assert manifest["panel"][0]["entry"] == "panel.luau"
@@ -32,7 +32,7 @@ for required in \
   'barWidget.setGlyph("brand-tailscale")' \
   'barWidget.setGlyphColor("on_surface")' \
   'barWidget.setGlyphColor("on_surface_variant", "script")' \
-  'noctalia.togglePanel("abulujayn/tailscale-panel:manager")'; do
+  'noctalia.togglePanel("abulujayn/tailscale:manager")'; do
   grep -Fq "$required" "$plugin_dir/status-widget.luau"
 done
 

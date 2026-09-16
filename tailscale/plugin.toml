@@ -1,5 +1,5 @@
-id = "abulujayn/tailscale-panel"
-name = "Tailscale Panel"
+id = "abulujayn/tailscale"
+name = "Tailscale"
 version = "1.0.0"
 plugin_api = 24
 author = "abulujayn"

@@ -57,5 +57,5 @@ function update()
 end
 
 function onClick()
-  noctalia.togglePanel("abulujayn/tailscale-panel:manager")
+  noctalia.togglePanel("abulujayn/tailscale:manager")
 end

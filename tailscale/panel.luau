@@ -1,7 +1,7 @@
 -- Tailscale Panel for Noctalia.
 -- All Tailscale calls use argv form so device data is never evaluated by a shell.
 
--- Manifest entry: abulujayn/tailscale-panel:manager
+-- Manifest entry: abulujayn/tailscale:manager
 
 local state = {
   loading = false,
