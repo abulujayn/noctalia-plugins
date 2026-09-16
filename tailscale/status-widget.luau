@@ -40,10 +40,10 @@ end
 local function render()
   barWidget.setImage(connected and "assets/tailscale-connected.svg" or "assets/tailscale-disconnected.svg", false, 18, 18)
   barWidget.setText("")
-  local tooltip = { { "Tailscale", detail } }
+  local tooltip = { { "Tailnet", detail } }
   if connected then
-    table.insert(tooltip, { "This device", localIp or "IP unavailable" })
-    table.insert(tooltip, { "Exit node", exitNode or "None selected" })
+    table.insert(tooltip, { "IP", localIp or "IP unavailable" })
+    table.insert(tooltip, { "Exit node", exitNode or "None" })
   end
   barWidget.setTooltip(tooltip)
 end
