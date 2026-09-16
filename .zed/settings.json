@@ -1,0 +1,11 @@
+{
+  "lsp": {
+    "luau-lsp": {
+      "settings": {
+        "definitions": [
+          "/home/abulujayn/projects/noctalia-plugins/noctalia.d.luau"
+        ]
+      }
+    }
+  }
+}
