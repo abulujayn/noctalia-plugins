@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Tailscale disconnected">
-  <g fill="none" stroke="#8B929D" stroke-width="2.7" transform="translate(-1.386 -1.22) scale(2.2171)">
-    <circle cx="3.4" cy="3.25" r="2.7"/><circle cx="3.4" cy="11.3" r="2.7"/><circle cx="3.4" cy="19.5" r="2.7"/>
-    <circle cx="11.5" cy="3.25" r="2.7"/><circle cx="11.5" cy="11.3" r="2.7"/><circle cx="11.5" cy="19.5" r="2.7"/>
-    <circle cx="19.5" cy="3.25" r="2.7"/><circle cx="19.5" cy="11.3" r="2.7"/><circle cx="19.5" cy="19.5" r="2.7"/>
+  <g fill="none" stroke="#8B929D" stroke-width="2.5">
+    <circle cx="8" cy="8" r="4.75"/><circle cx="8" cy="24" r="4.75"/><circle cx="8" cy="40" r="4.75"/>
+    <circle cx="24" cy="8" r="4.75"/><circle cx="24" cy="24" r="4.75"/><circle cx="24" cy="40" r="4.75"/>
+    <circle cx="40" cy="8" r="4.75"/><circle cx="40" cy="24" r="4.75"/><circle cx="40" cy="40" r="4.75"/>
   </g>
 </svg>
