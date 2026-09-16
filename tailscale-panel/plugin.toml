@@ -10,9 +10,13 @@ icon = "brand-tailscale"
 description = "View Tailnet devices and manage the local Tailscale connection and exit node."
 
 [[panel]]
-id = "panel"
+id = "manager"
 entry = "panel.luau"
 width = 560
 height = 620
 placement = "floating"
 position = "center"
+
+[[widget]]
+id = "status"
+entry = "status-widget.luau"
