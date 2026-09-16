@@ -8,6 +8,7 @@ local state = {
   action = nil,
   error = nil,
   status = nil,
+  connectionNotice = nil,
 }
 
 local function trim(value)
@@ -30,6 +31,13 @@ local function isOnline(device)
   return device.Online == true
 end
 
+local function tailnetDomain(status)
+  local dnsName = status and status.Self and status.Self.DNSName
+  if type(dnsName) ~= "string" then return "tailnet" end
+  local domain = dnsName:match("^[^.]+%.(.+)$")
+  return domain and domain:gsub("%.$", "") or "tailnet"
+end
+
 local function refresh()
   if state.loading then return end
 
@@ -42,6 +50,7 @@ local function refresh()
     if result.exitCode ~= 0 then
       state.status = nil
       state.error = trim(result.stderr) ~= "" and trim(result.stderr) or "Could not read Tailscale status."
+      state.connectionNotice = nil
       noctalia.state.set("tailscale_status", {})
       render()
       return
@@ -55,18 +64,27 @@ local function refresh()
       state.status = decoded
     end
     noctalia.state.set("tailscale_status", state.status or {})
+    local notice = state.connectionNotice
+    state.connectionNotice = nil
+    local isConnected = state.status ~= nil and state.status.BackendState == "Running"
+    if notice == "connect" and isConnected then
+      noctalia.notify("Tailscale", "Connected to " .. tailnetDomain(state.status))
+    elseif notice == "disconnect" and not isConnected then
+      noctalia.notify("Tailscale", "Disconnected from tailnet")
+    end
     render()
   end)
 
   if not accepted then
     state.loading = false
     state.error = "Could not start the Tailscale status command."
+    state.connectionNotice = nil
     noctalia.state.set("tailscale_status", {})
     render()
   end
 end
 
-local function runAction(label, argv)
+local function runAction(label, argv, connectionNotice)
   if state.loading or state.action then return end
 
   state.action = label
@@ -81,7 +99,10 @@ local function runAction(label, argv)
       return
     end
 
-    noctalia.notify("Tailscale", label .. " complete.")
+    state.connectionNotice = connectionNotice
+    if connectionNotice == nil then
+      noctalia.notify("Tailscale", label .. " complete.")
+    end
     refresh()
   end)
 
@@ -180,7 +201,11 @@ function render()
 
   table.insert(body, ui.row({ gap = 8 }, {
     ui.button({ text = connected and "Turn off" or "Turn on", glyph = connected and "toggle-left" or "toggle-right", variant = connected and "destructive" or "primary", flexGrow = 1, enabled = not state.loading and state.action == nil, onClick = function()
-      if connected then runAction("Turn off Tailscale", { "tailscale", "down" }) else runAction("Turn on Tailscale", { "tailscale", "up" }) end
+      if connected then
+        runAction("Turn off Tailscale", { "tailscale", "down" }, "disconnect")
+      else
+        runAction("Turn on Tailscale", { "tailscale", "up" }, "connect")
+      end
     end }),
     ui.button({ text = "Disable exit node", glyph = "route-off", variant = "outline", flexGrow = 1, enabled = connected and exitNodeId() ~= "" and state.action == nil, onClick = function() runAction("Disable exit node", { "tailscale", "set", "--exit-node=" }) end }),
   }))

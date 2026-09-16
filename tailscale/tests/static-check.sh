@@ -39,6 +39,8 @@ for required in \
 done
 
 grep -Fq 'noctalia.state.set("tailscale_status"' "$plugin_dir/panel.luau"
+grep -Fq '"Connected to " .. tailnetDomain(state.status)' "$plugin_dir/panel.luau"
+grep -Fq '"Disconnected from tailnet"' "$plugin_dir/panel.luau"
 
 test -f "$plugin_dir/assets/tailscale-connected.svg"
 test -f "$plugin_dir/assets/tailscale-disconnected.svg"
