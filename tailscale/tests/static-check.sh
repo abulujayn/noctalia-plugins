@@ -29,11 +29,13 @@ for required in \
 done
 
 for required in \
-  'barWidget.setGlyph("brand-tailscale")' \
-  'barWidget.setGlyphColor("on_surface")' \
-  'barWidget.setGlyphColor("on_surface_variant", "script")' \
+  'assets/tailscale-connected.svg' \
+  'assets/tailscale-disconnected.svg' \
   'noctalia.togglePanel("abulujayn/tailscale:manager")'; do
   grep -Fq "$required" "$plugin_dir/status-widget.luau"
 done
+
+test -f "$plugin_dir/assets/tailscale-connected.svg"
+test -f "$plugin_dir/assets/tailscale-disconnected.svg"
 
 echo "static plugin checks passed"

@@ -5,14 +5,8 @@ local connected = false
 local detail = "Checking Tailscale status…"
 
 local function render()
-  barWidget.setGlyph("brand-tailscale")
+  barWidget.setImage(connected and "assets/tailscale-connected.svg" or "assets/tailscale-disconnected.svg", false, 18, 18)
   barWidget.setText("")
-  -- Default icon colour while connected; a deliberately muted role otherwise.
-  if connected then
-    barWidget.setGlyphColor("on_surface")
-  else
-    barWidget.setGlyphColor("on_surface_variant", "script")
-  end
   barWidget.setTooltip({ { "Tailscale", detail } })
 end
 

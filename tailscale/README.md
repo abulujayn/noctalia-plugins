@@ -16,7 +16,7 @@ Open or close the panel:
 noctalia msg panel-toggle abulujayn/tailscale:manager
 ```
 
-Add the `abulujayn/tailscale:status` widget to a bar for a Tailscale logo indicator. It uses the normal bar icon colour while connected and a muted grey while disconnected; click it to open the manager.
+Add the `abulujayn/tailscale:status` widget to a bar for a Tailscale logo indicator. It switches between filled connected and outlined disconnected Tailscale logo variations; click it to open the manager.
 
 Use **Turn on** to run `tailscale up` and **Turn off** to run `tailscale down`. The device list refreshes from `tailscale status --json`; use **Copy IP** to put a device's primary Tailscale IP on the clipboard. Devices that advertise exit-node capability offer **Use as exit node**. Use **Disable exit node** to return to direct routing.
 
