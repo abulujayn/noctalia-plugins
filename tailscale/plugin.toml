@@ -14,8 +14,8 @@ id = "manager"
 entry = "panel.luau"
 width = 560
 height = 620
-placement = "floating"
-position = "center"
+placement = "attached"
+position = "auto"
 
 [[widget]]
 id = "status"
