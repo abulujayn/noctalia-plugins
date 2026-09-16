@@ -10,6 +10,17 @@ local function render()
   barWidget.setTooltip({ { "Tailscale", detail } })
 end
 
+-- Panel-initiated refreshes and actions publish this key as soon as their
+-- status command finishes, so the icon does not have to wait for this widget's
+-- next scheduled poll.
+noctalia.state.watch("connected", function(value)
+  if type(value) == "boolean" then
+    connected = value
+    detail = connected and "Connected" or "Not connected"
+    render()
+  end
+end)
+
 local function refresh()
   if checking then return end
   checking = true
@@ -18,6 +29,7 @@ local function refresh()
     checking = false
     connected = false
     detail = "Tailscale is not installed"
+    noctalia.state.set("connected", false)
     render()
     return
   end
@@ -27,6 +39,7 @@ local function refresh()
     if result.exitCode ~= 0 then
       connected = false
       detail = "Tailscale is unavailable"
+      noctalia.state.set("connected", false)
       render()
       return
     end
@@ -34,6 +47,7 @@ local function refresh()
     local ok, status = pcall(noctalia.json.decode, result.stdout)
     connected = ok and type(status) == "table" and status.BackendState == "Running"
     detail = connected and "Connected" or "Not connected"
+    noctalia.state.set("connected", connected)
     render()
   end)
 
@@ -41,6 +55,7 @@ local function refresh()
     checking = false
     connected = false
     detail = "Could not check Tailscale"
+    noctalia.state.set("connected", false)
     render()
   end
 end

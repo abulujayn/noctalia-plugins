@@ -31,9 +31,12 @@ done
 for required in \
   'assets/tailscale-connected.svg' \
   'assets/tailscale-disconnected.svg' \
+  'noctalia.state.watch("connected"' \
   'noctalia.togglePanel("abulujayn/tailscale:manager")'; do
   grep -Fq "$required" "$plugin_dir/status-widget.luau"
 done
+
+grep -Fq 'noctalia.state.set("connected"' "$plugin_dir/panel.luau"
 
 test -f "$plugin_dir/assets/tailscale-connected.svg"
 test -f "$plugin_dir/assets/tailscale-disconnected.svg"

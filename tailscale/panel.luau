@@ -42,6 +42,7 @@ local function refresh()
     if result.exitCode ~= 0 then
       state.status = nil
       state.error = trim(result.stderr) ~= "" and trim(result.stderr) or "Could not read Tailscale status."
+      noctalia.state.set("connected", false)
       render()
       return
     end
@@ -53,12 +54,14 @@ local function refresh()
     else
       state.status = decoded
     end
+    noctalia.state.set("connected", state.status ~= nil and state.status.BackendState == "Running")
     render()
   end)
 
   if not accepted then
     state.loading = false
     state.error = "Could not start the Tailscale status command."
+    noctalia.state.set("connected", false)
     render()
   end
 end
@@ -205,6 +208,7 @@ end
 function onOpen()
   if not noctalia.commandExists("tailscale") then
     state.error = "The tailscale command is not installed or is not on PATH."
+    noctalia.state.set("connected", false)
     render()
     return
   end
