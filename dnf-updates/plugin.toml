@@ -1,0 +1,52 @@
+id = "abulujayn/dnf-updates"
+name = "DNF Updates"
+version = "1.0.0"
+plugin_api = 24
+author = "abulujayn"
+license = "MIT"
+dependencies = ["dnf", "rpm"]
+tags = ["system", "updates", "fedora", "dnf"]
+icon = "system-software-update"
+description = "Shows the number of pending DNF package updates in the top bar."
+
+[[widget]]
+id = "count"
+entry = "widget.luau"
+
+[[panel]]
+id = "updates"
+entry = "panel.luau"
+width = 500
+height = 540
+placement = "attached"
+open_near_click = true
+
+[[widget.setting]]
+key = "glyph"
+type = "glyph"
+label_key = "settings.glyph.label"
+description_key = "settings.glyph.description"
+default = "package"
+
+[[widget.setting]]
+key = "label"
+type = "string"
+label_key = "settings.label.label"
+description_key = "settings.label.description"
+default = "DNF"
+
+[[widget.setting]]
+key = "refresh_minutes"
+type = "int"
+label_key = "settings.refresh_minutes.label"
+description_key = "settings.refresh_minutes.description"
+default = 30
+min = 5
+max = 1440
+
+[[widget.setting]]
+key = "show_when_current"
+type = "bool"
+label_key = "settings.show_when_current.label"
+description_key = "settings.show_when_current.description"
+default = false

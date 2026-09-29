@@ -1,0 +1,10 @@
+{
+  "settings.glyph.label": "Glyph",
+  "settings.glyph.description": "Icon shown before the update count.",
+  "settings.label.label": "Label",
+  "settings.label.description": "Text shown before the update count. Leave empty to show only the count.",
+  "settings.refresh_minutes.label": "Refresh interval",
+  "settings.refresh_minutes.description": "Minutes between DNF update checks.",
+  "settings.show_when_current.label": "Show when current",
+  "settings.show_when_current.description": "Keep the widget visible with a count of zero when no updates are pending."
+}
